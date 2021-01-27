@@ -17,6 +17,12 @@ IO.puts map[key]
 map=%{:a=> true, :key=>"hello", true => :ok}
 IO.puts Map.get(map, :a) #5
 map2=Map.put(map, :c,4)
-Io.puts (map2==map)
+IO.puts (map2==map)
 map3=Map.put(map2,:c,false)
-Io.puts (map2==map3)
+IO.puts (map2==map3)
+%{map | :c=>"bye"}#da error why :c not in map
+map4=%{map | :a=>"bye"}#%{map | :a=>"bye"}
+user=[ frank: %{country:"Peru", lastname: "Frank"},
+       Javier: %{country: "Colombia", lastname: "Javier"}
+      ]
+IO.puts users[:javier].lastname
