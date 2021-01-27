@@ -15,7 +15,13 @@ defmodule Collatz do
     defp fcollatzp1(n,i,acc) when is_integer(n) do
       cond do
         i==n->acc  #cuando llegue a devuelve acumulado
-        true-> fcollatzp1(evaluateparimpa(n), i+1,acc * (i+1))
+        rem(n,2)==0->
+          IO.puts "#{n}"
+          fcollatzp1(div(n,2),i,1)
+        true->
+          IO.puts "#{n}"
+          fcollatzp1(n*3+1,i,1)
+
       end
     end
     def evaluateparimpa(x)  do
