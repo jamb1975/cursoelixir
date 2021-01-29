@@ -7,7 +7,7 @@ def classic(n) when is_integer(n) and n>0 do
   # end
 end
 defp   fibonaccip(n)  do
-  #IO.puts "#{n-1} + #{n-2}=#{(n-1)+(n-2)}"
+ # IO.puts "Fibo acum: #{n}"
   cond do
     n==0  -> 0
     n==1-> 1
@@ -15,4 +15,5 @@ defp   fibonaccip(n)  do
   end
 end
 end
-IO.puts Fibonacci.classic(10)
+IO.puts Fibonacci.classic(3)
+IO.inspect  [Fibonacci.classic(0),Fibonacci.classic(1),Fibonacci.classic(2),Fibonacci.classic(3),Fibonacci.classic(4),Fibonacci.classic(5),Fibonacci.classic(6),Fibonacci.classic(7),Fibonacci.classic(8),Fibonacci.classic(9)]

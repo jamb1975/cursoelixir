@@ -1,29 +1,22 @@
 defmodule PrintInteger do
-  def classic(n) when is_integer(n) and n>0 do
-    #cond do
-      #n=0=1 -> 1# si es uno el proceso termina en 1
-    #  true->
-      fprintintegerp(n,2,"1") # call function privada facp1
-   # end
-  end
-  defp   fprintintegerp(n,i,s)  do
-    IO.puts s
-  #  IO.puts n
-  #  IO.puts i
-    cond do
-     i>n-> :ok
-      true -> fprintintegerp(n,i+1,fformatlinae(1,n,i,""))
-    end
-  end
-  defp   fformatlinae( k,n, j, s )  do
-   # IO.puts n
-  #  IO.puts j
-  #  IO.puts s
-    cond do
-      k > j -> s
-      rem(k,2) > 0 -> fformatlinae(k + 1, n, j , s <> "1")
-      rem(k,2) == 0 -> fformatlinae(k + 1, n, j , s <> "0")
-    end
+def classic(n) when is_integer(n) and n>0 do
+      fprintintegerp(n,2,"1") # call function privada fprintintegerp
+  # end
+end
+defp   fprintintegerp(n,i,s)  do
+  IO.puts s #muestra la impresión de linea
+  cond do
+    i>n-> :ok #salimos
+    true -> fprintintegerp(n,i+1,fformatlinae(1,n,i,"")) #ciclo para imprimir la liena 0 10 ...
   end
 end
-PrintInteger.classic(10)
+defp   fformatlinae( k,n, j, s )  do #función que me permite concatenar la cadena de impresión s donde k=1 n=numero de lineas i
+
+  cond do
+    k > j -> s #salimos cuando k=1 sea mayor al número de linea actual
+    rem(k,2) > 0 -> fformatlinae(k + 1, n, j ,  "1"<> s)  #si es impar concatenamos el 1 a la izquierda
+    true-> fformatlinae(k + 1, n, j ,   "0"<> s)  #si es par concatenamos el 0 a la izquierda
+  end
+end
+end
+PrintInteger.classic(5)

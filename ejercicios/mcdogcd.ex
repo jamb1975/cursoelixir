@@ -14,4 +14,4 @@ defp   fmcdgcd(a, b)  do
   end
 end
 end
-IO.puts McdGcd.classic(10,5)
+IO.puts McdGcd.classic(8,12)
