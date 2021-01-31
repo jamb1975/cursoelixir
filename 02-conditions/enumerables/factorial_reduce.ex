@@ -1,12 +1,14 @@
-defmodule Fibonacci do
-def fibonacci(n) when is_integer(n) and n >0 do
-  fibonacci(n,0, 1)
-end
-defp fibonaccip(1, a, b), do: b
-defp fibonaccip(1, a, b), do: fibonacci(n - 1,b, a + b)
-end
+defmodule FactorialReduce do
+  def  factorialreduce(n) when is_integer(n), do: factorialreducep(n, 1, &(&1 * &2))
+  defp factorialreducep(0, _, _), do: 0
+  defp factorialreducep(1, acc, _), do: acc
+  defp factorialreducep(n, acc, action) , do: factorialreducep(n-1, action.(n, acc), action )
 
-IO.puts Fibonacci.fibonacci(1)
-IO.puts Fibonacci.fibonacci(2)
-IO.puts Fibonacci.fibonacci(3)
-IO.puts Fibonacci.fibonacci(4)
+end
+IO.puts( FactorialReduce.factorialreduce(0))
+IO.puts( FactorialReduce.factorialreduce(1))
+IO.puts( FactorialReduce.factorialreduce(2))
+IO.puts( FactorialReduce.factorialreduce(3))
+IO.puts( FactorialReduce.factorialreduce(5))
+IO.puts( FactorialReduce.factorialreduce(6))
+IO.puts( FactorialReduce.factorialreduce(7))
