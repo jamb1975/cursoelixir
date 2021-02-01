@@ -12,3 +12,4 @@ IO.puts( FactorialReduce.factorialreduce(3))
 IO.puts( FactorialReduce.factorialreduce(5))
 IO.puts( FactorialReduce.factorialreduce(6))
 IO.puts( FactorialReduce.factorialreduce(7))
+#Si es viable ya que nos ayuda a reducir y optimizar código
