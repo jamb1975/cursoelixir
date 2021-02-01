@@ -1,17 +1,17 @@
-defmodule IsAscendant do
-  def is_ascendant?(list) when is_list(list), do: is_ascendantp?(list, nil)
-  defp is_ascendantp?([], _), do: true
-  defp is_ascendantp?([head | tail ], nil), do: is_ascendantp?([head | tail], head)
-  defp is_ascendantp?([head | tail ], acc) when acc >= head, do: is_ascendantp?(tail, head)
-  defp is_ascendantp?(_, _), do: false
+defmodule IsAscendantReduce do
+  def is_ascendantreduce?(list) when is_list(list), do: is_ascendantreducep?(list, nil)
+  defp is_ascendantreducep?([], _), do: true
+  defp is_ascendantreducep?([head | tail ], nil), do: is_ascendantreducep?([head | tail], head)
+  defp is_ascendantreducep?([head | tail ], acc) when acc >= head, do: is_ascendantreducep?(tail, head)
+  defp is_ascendantreducep?(_, _), do: false
 end
 
 
-IO.puts IsAscendant.is_ascendant?([])
-IO.puts IsAscendant.is_ascendant?([7,2,1])
-IO.puts IsAscendant.is_ascendant?([1])
-IO.puts IsAscendant.is_ascendant?([3, 2, 7])
-IO.puts IsAscendant.is_ascendant?([1, 2, 7, 9, 12])
-IO.puts IsAscendant.is_ascendant?([12, 9, 7, 2, 1 ])
-IO.puts IsAscendant.is_ascendant?([12, 9, 12, 1, 2 ])
+IO.puts IsAscendantReduce.is_ascendantreduce?([])
+IO.puts IsAscendantReduce.is_ascendantreduce?([7,2,1])
+IO.puts IsAscendantReduce.is_ascendantreduce?([1])
+IO.puts IsAscendantReduce.is_ascendantreduce?([3, 2, 7])
+IO.puts IsAscendantReduce.is_ascendantreduce?([1, 2, 7, 9, 12])
+IO.puts IsAscendantReduce.is_ascendantreduce?([12, 9, 7, 2, 1 ])
+IO.puts IsAscendantReduce.is_ascendantreduce?([12, 9, 12, 1, 2 ])
 # No es viable ya que no hay operaciones o formulas para aplicar
