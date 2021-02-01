@@ -14,3 +14,4 @@ IO.puts IsAscendant.is_ascendant?([3, 2, 7])
 IO.puts IsAscendant.is_ascendant?([1, 2, 7, 9, 12])
 IO.puts IsAscendant.is_ascendant?([12, 9, 7, 2, 1 ])
 IO.puts IsAscendant.is_ascendant?([12, 9, 12, 1, 2 ])
+# No es viable ya que no hay operaciones o formulas para aplicar
