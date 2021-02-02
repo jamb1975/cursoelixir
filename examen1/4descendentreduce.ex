@@ -1,12 +1,13 @@
 defmodule IsDescendentReduce do
-  def is_descendentreduce?(list) when is_list(list), do: is_descendentreducep?(list, nil)
-  defp is_descendentreducep?([], _), do: true
-  defp is_descendentreducep?([head | tail ], nil), do: is_descendentreducep?([head | tail], head)
-  defp is_descendentreducep?([head | tail ], acc) when acc >= head, do: is_descendentreducep?(tail, head)
-  defp is_descendentreducep?(_, _), do: false
+  def is_descendentreduce?(list \\ []) when is_list(list), do: reduce(list, nil, nil)
+
+  def reduce(list, acc, action), do:  reducep(list, acc, action)
+  def reducep([], _, _), do: true
+  def reducep([head | tail ], acc, action) when acc >= head,  do: reducep(tail, head, action)
+  def reducep(_, _, _), do: false
 end
 
-
+IO.puts IsDescendentReduce.is_descendentreduce?()
 IO.puts IsDescendentReduce.is_descendentreduce?([])
 IO.puts IsDescendentReduce.is_descendentreduce?([7,2,1])
 IO.puts IsDescendentReduce.is_descendentreduce?([1])

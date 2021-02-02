@@ -1,15 +1,17 @@
 defmodule FactorialReduce do
-  def  factorialreduce(n) when is_integer(n), do: factorialreducep(n, 1, &(&1 * &2))
-  defp factorialreducep(0, _, _), do: 0
-  defp factorialreducep(1, acc, _), do: acc
-  defp factorialreducep(n, acc, action) , do: factorialreducep(n-1, action.(n, acc), action )
+  def  reduce(n \\ 0) when is_integer(n), do: reducep(n, 1, &(&1 * &2))
+  defp reducep(0, _, _), do: 0
+  defp reducep(1, acc, _), do: acc
+  defp reducep(n, acc, action) , do: reducep(n-1, action.(n, acc), action )
+
 
 end
-IO.puts( FactorialReduce.factorialreduce(0))
-IO.puts( FactorialReduce.factorialreduce(1))
-IO.puts( FactorialReduce.factorialreduce(2))
-IO.puts( FactorialReduce.factorialreduce(3))
-IO.puts( FactorialReduce.factorialreduce(5))
-IO.puts( FactorialReduce.factorialreduce(6))
-IO.puts( FactorialReduce.factorialreduce(7))
+IO.puts( FactorialReduce.reduce())
+IO.puts( FactorialReduce.reduce(0))
+IO.puts( FactorialReduce.reduce(1))
+IO.puts( FactorialReduce.reduce(2))
+IO.puts( FactorialReduce.reduce(3))
+IO.puts( FactorialReduce.reduce(5))
+IO.puts( FactorialReduce.reduce(6))
+IO.puts( FactorialReduce.reduce(7))
 #Si es viable ya que nos ayuda a reducir y optimizar código

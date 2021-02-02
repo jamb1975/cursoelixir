@@ -1,10 +1,14 @@
-defmodule SumaArrayReduce do
-  def sumaarrayreduce(list) when is_list(list), do: sumaarrayreducep(list, [], 0, &(&1 ++ &2 ))
-  def sumaarrayreducep([], resultarray, _, _), do: resultarray
-  def sumaarrayreducep([h | t], resultarray, acc, concatearray) when is_function(concatearray, 2), do: sumaarrayreducep(t, concatearray.(resultarray, [acc + h]), acc + h, concatearray)
-end
+defmodule SumaArray do
+  def sumaarray(list \\ []) when is_list(list), do: reduce(list, [], 0, &(&1 + &2))
 
-IO.inspect SumaArrayReduce.sumaarrayreduce([])
-IO.inspect SumaArrayReduce.sumaarrayreduce([1])
-IO.inspect SumaArrayReduce.sumaarrayreduce([1, 2])
-IO.inspect SumaArrayReduce.sumaarrayreduce([1, 3, 4, -1])
+
+  def reduce(list, resultarray, acc, sum) when is_function(sum,2), do:  reducep(list, resultarray, acc, sum)
+  def reducep([], resultarray, _, _), do: resultarray
+  def reducep([h | t],  resultarray, acc, sum),  do: reducep(t, resultarray ++ [sum.(acc, h)],sum.(acc, h), sum)
+
+end
+IO.inspect SumaArray.sumaarray()
+IO.inspect SumaArray.sumaarray([])
+IO.inspect SumaArray.sumaarray([1])
+IO.inspect SumaArray.sumaarray([1, 2])
+IO.inspect SumaArray.sumaarray([1, 3, 4, -1])
