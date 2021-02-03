@@ -6,5 +6,5 @@ end
 IO.inspect SumaArray.sumaarray()
 IO.inspect SumaArray.sumaarray([])
 IO.inspect SumaArray.sumaarray([1])
-IO.inspect SumaArray.sumaarray([1, 2])
+IO.inspect SumaArray.sumaarray([1, -2])
 IO.inspect SumaArray.sumaarray([1, 3, 4, -1])

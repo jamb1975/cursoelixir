@@ -22,7 +22,7 @@ map3=Map.put(map2,:c,false)
 IO.puts (map2==map3)
 %{map | :c=>"bye"}#da error why :c not in map
 map4=%{map | :a=>"bye"}#%{map | :a=>"bye"}
-user=[ frank: %{country:"Peru", lastname: "Frank"},
+user=[frank: %{country:"Peru", lastname: "Frank"},
        Javier: %{country: "Colombia", lastname: "Javier"}
       ]
 IO.puts users[:javier].lastname

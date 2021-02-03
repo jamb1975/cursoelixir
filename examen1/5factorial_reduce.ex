@@ -14,4 +14,5 @@ IO.puts( FactorialReduce.reduce(3))
 IO.puts( FactorialReduce.reduce(5))
 IO.puts( FactorialReduce.reduce(6))
 IO.puts( FactorialReduce.reduce(7))
-#Si es viable ya que nos ayuda a reducir y optimizar código
+#no es viable ya que  se utilizan mas pasos
+# forzan la solución

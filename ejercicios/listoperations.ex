@@ -1,5 +1,5 @@
 defmodule ListOperations do
-def sum(a ) when is_list(a),  do: sump(a, 0, 0) # call function privada facp1
+def sum( a  ) when is_list(a),  do: sump(a, 0, 0) # call function privada facp1
 def reverse( a ) when is_list(a) , do: reversep(a, [], length(a))
 def is_ascendant?( a ) when is_list(a) , do: is_ascendantp(a, 0, length(a))
 defp sump( a, i, acc ) do
@@ -12,12 +12,6 @@ end
 end
 defp reversep(_, acc, size) when size < 1, do: acc
 defp reversep(list, acc, size), do: reversep(list,acc ++ [Enum.at(list,size - 1)], size - 1)
-defp is_ascendantp(_, acc, size) when size < 0 do
-cond do
-acc > 0 -> false
-true -> true
-end
-end
 defp is_ascendantp(list, acc, size) do
 cond do
 size<2 ->  if acc <= 0 do true
@@ -31,6 +25,22 @@ true->  true
 end
 end
 end
+sum1= &ListOperations.sum/1
+IO.inspect sum1.([2, 5])
+#IO.inspect sum1.()
+IO.inspect ListOperations.sum( [])
+IO.inspect ListOperations.sum( [7])
+IO.inspect ListOperations.sum( [2, 5])
+IO.inspect ListOperations.sum( [7,  5])
+IO.inspect ListOperations.sum( [2,5,7, 9, 11])
+IO.puts "==================================================="
+IO.inspect ListOperations.reverse( [])
+IO.inspect ListOperations.reverse( [7])
+IO.inspect ListOperations.reverse( [2, 5])
+IO.inspect ListOperations.reverse( [7,  5])
+IO.inspect ListOperations.reverse( [2,5,7, 9, 11])
+
+IO.puts "=================================================="
 IO.inspect ListOperations.is_ascendant?( [])
 IO.inspect ListOperations.is_ascendant?( [7])
 IO.inspect ListOperations.is_ascendant?( [2, 5])

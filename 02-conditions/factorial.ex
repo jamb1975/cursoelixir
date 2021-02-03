@@ -9,25 +9,32 @@
   #  end
  # end
 
-  defmodule Factorial2 do
+  defmodule Factorial do
     def classic(n) when is_integer(n) and n>=0 do
       cond do
-
           n < 2 -> 1
-
-          true->facp1(n, 0, 1)
+          true->fac1(n)
         end
       end
       def fac1(n) do
-        facp1(n,1,0)
+        facp1(n,0,1)
       end
-      defp facp1(n,1,acc) when is_integer(n) do
+      #defp facp1(0,acc) when is_integer(acc) do
+      #  acc
+      #end
+      defp facp1(n,i,acc) when is_integer(n) do
         cond do
           i==n->acc
-          true-> facp1(n, i+1,acc)
+          true-> facp1(n, i+1,acc * (i+1))
         end
       end
     end
 
 
-IO.puts Factorial2.classic(0)
+    IO.puts Factorial.classic(6)
+    IO.puts("fac(0) =#{Factorial.fac1(0)}")
+    IO.puts("fac(1) =#{Factorial.fac1(1)}")
+    IO.puts("fac(2) =#{Factorial.fac1(2)}")
+    IO.puts("fac(3) =#{Factorial.fac1(3)}")
+    IO.puts("fac(4) =#{Factorial.fac1(4)}")
+    IO.puts("fac(5) =#{Factorial.fac1(5)}")

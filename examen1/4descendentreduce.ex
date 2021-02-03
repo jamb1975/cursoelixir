@@ -9,7 +9,7 @@ end
 
 IO.puts IsDescendentReduce.is_descendentreduce?()
 IO.puts IsDescendentReduce.is_descendentreduce?([])
-IO.puts IsDescendentReduce.is_descendentreduce?([7,2,1])
+IO.puts IsDescendentReduce.is_descendentre duce?([7,2,1])
 IO.puts IsDescendentReduce.is_descendentreduce?([1])
 IO.puts IsDescendentReduce.is_descendentreduce?([3, 2, 7])
 IO.puts IsDescendentReduce.is_descendentreduce?([1, 2, 7, 9, 12])

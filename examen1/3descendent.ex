@@ -1,7 +1,7 @@
 defmodule IsDescendent do
   def is_descendent?(list \\ []) when is_list(list), do: is_descendentp?(list, nil)
   defp is_descendentp?([], _), do: true
-  defp is_descendentp?([head | tail ], nil), do: is_descendentp?([head | tail], head)
+  defp is_descendentp?([head | tail ], nil), do: is_descendentp?(tail, head)
   defp is_descendentp?([head | tail ], acc) when acc >= head, do: is_descendentp?(tail, head)
   defp is_descendentp?(_, _), do: false
 end
