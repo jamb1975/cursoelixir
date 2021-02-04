@@ -70,3 +70,11 @@ IO.puts x
 
  ####################
  IO.inspect 'Hola', charlists: :as_lists
+
+ *n lista n..1*3+1 new list solo tenga multiplos de 2
+Enum.map([1, 2, 3, 4, 5], &(3 * & 1 + 1))
+Enum.reduce([1, 2, 3, -1], 0, fn act, acc -> act +acc end)
+list=[1, 2, 3, 4, 5]
+triple_plus_one=Enum.map(list, &3 * &1 + 1 ))
+Enum.filter(triple_plus)
+Enum.map(Enum.filter(list, &(rem(&1,2) == 1)))

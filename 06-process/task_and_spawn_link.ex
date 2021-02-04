@@ -1,8 +1,9 @@
 pid = spawn_link fn -> 1 + 2 end
 IO.inspect pid
 pid1 = spawn fn -> raise "Opps! Threre's an error" end #"lanza un nuevo proceso aislado"
-#2 = spawn_link fn -> raise "Opps! Threre's an error"  #"lanza un nuevo proceso aislado"
 IO.inspect pid1#procesos son muy faciles y livianos de implementa y puede manejar mile de procesos
+
+#pid2 = spawn_link fn -> raise "Opps! Threre's an error"  #"lanza un nuevo proceso aislado"
 #IO.inspect pid2
 
 #Task

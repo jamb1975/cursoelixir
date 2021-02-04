@@ -1,11 +1,22 @@
 defmodule IsDescendentReduce do
   def is_descendentreduce?(list \\ []) when is_list(list), do: reduce(list, nil, nil)
 
-  def reduce(list, acc, action), do:  reducep(list, acc, action)
-  def reducep([], _, _), do: true
-  def reducep([head | tail ], acc, action) when acc >= head,  do: reducep(tail, head, action)
-  def reducep(_, _, _), do: false
+  def is_descendentreduce?(list \\ []) when is_list(list) do
+    {result, _} =reduce(list,{true, nil}, fn  h, {condition, min} ->
+    cond do
+     !condition -> {false, }
+    end)
+    result
 end
+
+  def reduce(list, acc, action) when is_list(list) and is_function(action, 2) do
+    reducep(list, acc, action)
+  end
+  #defp mapp([], acc, _), do: acc
+  #defp mapp([h | t], acc, transform), do: mapp(t, acc ++[transform.(h)], transform)
+  defp reducep([], acc, _), do: acc
+  defp reducep([h | t], acc, action), do: reducep(t, action.(h, acc), action)
+
 
 IO.puts IsDescendentReduce.is_descendentreduce?()
 IO.puts IsDescendentReduce.is_descendentreduce?([])

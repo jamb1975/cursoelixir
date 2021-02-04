@@ -1,8 +1,8 @@
 await = fn ->
 receive do
-{:hello, msg} -> msg
-{:bye, msg} -> msg <> " " <> msg
-{:pid, pid}  -> pid
+  {:hello, msg} -> msg
+  {:bye, msg} -> msg <> " " <> msg
+  {:pid, pid}  -> pid
 end
 end
 
@@ -26,17 +26,13 @@ await3 = fn millis ->
   end
 
   test = fn await ->
-  send self(), {:hello, "World"}
-  IO.puts await.() # world
-
-  send self(), {:bye, "bye"}
-  IO.puts await.() #" bye bye"
-
-  send self(), {:hi, "?"}
-  IO.inspect await.() # will
-
-
-    end
+           send self(), {:hello, "World"}
+           IO.puts await.() # world
+           send self(), {:bye, "bye"}
+           IO.puts await.() #" bye bye"
+           send self(), {:hi, "?"}
+           IO.inspect await.() # will
+        end
 
     test.(await2)
     #world
@@ -51,8 +47,8 @@ await3 = fn millis ->
     IO.puts "=============================="
     self_pid = self()
     pid = spawn fn ->
-      spid = self()
-      send self_pid, {:pid, spid}
-    end
-    second_pid = await3.(1000)#process id of the spawn
+                 spid = self()
+                 send self_pid, {:pid, spid}
+                end
+    second_pid = await3.(1000) #process id of the spawn
     IO.puts pid === second_pid
