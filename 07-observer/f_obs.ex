@@ -45,11 +45,13 @@ def on_event({:read, observer_pid}, observers, state) do
   listen(observers, state)
 end
 
+def on_event({:increment}, observers, state), do: notify(observers, state + 1)
+def on_event({:decrement}, observers, state), do: notify(observers, state - 1)
+
+
 def increment(subject), do: send(subject, {:increment})
 def decrement(subject), do: send(subject, {:decrement})
 
-def on_event({:increment}, observers, state), do: notify(observers, state + 1)
-def on_event({:decrement}, observers, state), do: notify(observers, state - 1)
 
 
 
