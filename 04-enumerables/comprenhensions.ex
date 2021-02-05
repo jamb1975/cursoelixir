@@ -77,9 +77,10 @@ listu = for n <- list, uniq: true, do: n + 3
 #
 text = "AbcaBCabC"
 letters = for<<c <- text>>, c in ?a..?z, do: <<c>>
-Enum.reduce(letters, %{}, fn c, acc -> Map.update(acc, c, 64, &(&1 + 1))end)
 IO.inspect letters
+letters= Enum.reduce(letters, %{}, fn c, acc -> Map.update(acc, c, 64, &(&1 + 1))end)
 
+IO.inspect letters
 text = "AbcaBCabC"
 letters = for<<c <- text>>, c in ?a..?z, reduce: %{} do
    acc -> Map.update(acc, <<c>>, 64, &(&1 + 1))
