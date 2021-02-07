@@ -30,7 +30,7 @@ defmodule MyMapReduceTest do
     end
     assert_raise FunctionClauseError, fn ->
       filter(1, 1)
-  end
+    end
     assert filter([1, 2, 3, 4, 5, 6, 7], &(rem(&1,2)==1)) == [1, 3, 5, 7]
     assert filter([1],&(rem(&1,2)==1)) == [1]
   end

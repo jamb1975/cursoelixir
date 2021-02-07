@@ -18,13 +18,16 @@ defmodule MyObserverTest do
   test "attach, increment and notify" do
 
     subject = MyObserver.create()
+
     MyObserver.increment(subject)
     assert MyObserver.await() == :timeout
 
     MyObserver.attach(subject)
     MyObserver.increment(subject)
-    assert MyObserver.await() == 2
+    #assert MyObserver.await() == 2
+    #https://hexdocs.pm/ex_unit/ExUnit.Assertions.html
 
+    assert_receive 2
     MyObserver.detach(subject)
     MyObserver.increment(subject)
     assert MyObserver.await() == :timeout
