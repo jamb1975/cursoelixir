@@ -54,7 +54,7 @@ end
     throw(453_637)
     IO.puts("This is always printed")
     catch
-    e -> IO.puts("This is a catch#{e}")
+    e -> IO.puts("This is a catch #{e}")
     after
       IO.puts("This is always printed")
     end
@@ -123,3 +123,45 @@ end
     acc -> acc
 end
 IO.puts sum
+
+######elseif
+
+how_large_is = fn x ->
+  try do
+   1 / x
+   rescue
+    ArithmeticError -> :infinity
+  #catch
+    #e -> IO.puts e
+   else
+    d when d < 1 and d > -1 -> :small
+    d when d < 10 and d > -10 -> :middle
+  _ -> :large
+   after
+    IO.puts "hello"
+
+  end
+end
+#how_large_is.(0)
+IO.puts how_large_is.(1)
+IO.puts how_large_is.(2)
+IO.puts how_large_is.(0.5)
+IO.puts how_large_is.(0.1)
+
+a = spawn_link fn ->
+   receive do
+    msg -> IO.puts(msg)
+  end
+end
+IO.puts Process.alive?(a) #true
+
+send a, "Hello"
+IO.puts Process.alive?(a) #false
+
+a = spawn_link fn ->
+  exit(1)
+  receive do
+    msg -> IO.puts(msg)
+  end
+end
+IO.puts Process.alive?(a)
