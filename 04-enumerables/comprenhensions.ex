@@ -1,13 +1,11 @@
 list = for n <- [1, 2, 3, 4], do: n * n
+IO.inspect list
 #Reading x
 x = 3 #this will not be updated
 list = for n <- [1, 2, 3, 4], do: n + x
 IO.inspect list #[1, 2, 3, 4] (as charlist)
 #Updating x ?
-list = for n <- [1, 2, 3, 4] do
-x= n + x
-#^--x is unsed
-end
+list = for n <- [1, 2, 3, 4], do: n + x
 IO.inspect list #[4, 5, 6, 7]
 
 ##keyword list
@@ -16,7 +14,7 @@ list = for {:good, n} <- values, do: n * n
 IO.inspect(list) #[1, 25, 49])
 ##,
 values = [1, 3, 2, 6, 5, 9, 8, 24, 20]
-even?=&(rem(&1, 2)==0)
+even? = &(rem(&1, 2)==0)
 list = for n <- values, even?.(n), do: n * n
 IO.inspect list
 
@@ -28,7 +26,7 @@ for l1 <- letters, n <- numbers, do: {l1, n}
 
 evens = [0, 2, 4,6, 8, 10, 12]
 mod3_numbers = [0, 3, 6, 9, 12, 15, 18]
-for _ <- evens, n <- mod3_numbers, do: n
+for _ <- evens, x, n <- mod3_numbers, do: n
 
 IO.inspect list
 
