@@ -1,4 +1,4 @@
-import user
+import User
 user =
 create_user()
 |> set_name("Javier","Murcia")
