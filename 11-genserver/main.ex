@@ -13,14 +13,14 @@ GsBalance.withdraw(balance, 30) |> IO.inspect()
 GsBalance.transfer(balance, 80) |> IO.inspect()
 GsBalance.read(balance) |> IO.inspect()
 IO.puts("=========================================")
-{:ok, subject} = GsObserver.create(0)
+{:ok, subject} = GsObservable.create(0)
 
 
-#GsObserver.attach(subject)
-
-GsObserver.increment(subject) |> IO.inspect()
-GsObserver.increment(subject) |> IO.inspect()
-GsObserver.detach(subject)
-GsObserver.decrement(subject) |> IO.inspect()
-GsObserver.increment(subject) |> IO.inspect()
-
+#GsObservable.attach(subject)
+GsObservable.read(subject) |> IO.inspect()
+GsObservable.increment(subject) |> IO.inspect()
+GsObservable.await()
+GsObservable.increment(subject) |> IO.inspect()
+GsObservable.detach(subject)
+GsObservable.decrement(subject) |> IO.inspect()
+GsObservable.increment(subject) |> IO.inspect()
