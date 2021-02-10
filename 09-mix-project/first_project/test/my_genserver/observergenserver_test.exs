@@ -1,18 +1,29 @@
 defmodule ObserverGenServerTest do
   use ExUnit.Case
   doctest ObservableGenServer
-  test "Observable utilizando GenServer increment y decrement" do
-    subject = ObservableGenServer.create()
+  test "Observable utilizando attatch GenServer increment y decrement" do
+    {:ok, subject} = ObservableGenServer.create(0)
     ObservableGenServer.increment(subject)
-    assert_receive 1
     assert ObservableGenServer.await() == :timeout
     ObservableGenServer.attach(subject)
     ObservableGenServer.increment(subject)
+    assert ObservableGenServer.await() == 2
+    ObservableGenServer.decrement(subject)
+    assert ObservableGenServer.await() == 1
+  end
 
-    assert_receive 2
-    ObservableGenServer.detach(subject)
+  test "Observable utilizando attach detach | GenServer increment y decrement" do
+    {:ok, subject} = ObservableGenServer.create(7)
+    ObservableGenServer.attach(subject)
     ObservableGenServer.increment(subject)
-    assert_receive 2
+    assert ObservableGenServer.await() == 8
+    ObservableGenServer.increment(subject)
+    assert ObservableGenServer.await() == 9
+    ObservableGenServer.detach(subject)
+    ObservableGenServer.decrement(subject)
     assert ObservableGenServer.await() == :timeout
+    ObservableGenServer.attach(subject)
+    ObservableGenServer.decrement(subject)
+    assert ObservableGenServer.await() == 7
   end
 end
