@@ -21,3 +21,7 @@
    Ets.update(table, "bar", 7)
    record = Ets.read(table, "bar")
    IO.inspect record["bar"]
+
+   Ets.insert(table, "msg", "hola")
+   record = Ets.read(table, "msg")
+   IO.inspect record["msg"]
