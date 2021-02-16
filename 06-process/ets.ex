@@ -24,6 +24,6 @@
 
    Ets.insert(table, "msg", "hola")
    record = Ets.read(table, "msg1")
-   IO.inspect record["msg"]
+   IO.inspect record["msg1"]
    record = Ets.read(table, "msg")
    IO.inspect record["msg"]
