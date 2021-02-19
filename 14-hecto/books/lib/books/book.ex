@@ -1,5 +1,6 @@
 defmodule Books.Book do
   use Ecto.Schema
+  import Ecto.Changeset
 
   schema "books" do
     field :name, :string
@@ -8,7 +9,8 @@ defmodule Books.Book do
 
   def changeset(book, params \\ %{}) do
     book
-    |> Ectos.Changeset.cast(params, [:name, :author])
-    |> Ecto.Changeset.validate_required([:name])
+    |> cast(params, [:name, :author])
+    |> validate_required([:name])
+    |> unique_constraint(:city)
   end
 end
