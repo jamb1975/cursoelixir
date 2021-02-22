@@ -26,6 +26,7 @@ for l1 <- letters, n <- numbers, do: {l1, n}
 
 evens = [0, 2, 4,6, 8, 10, 12]
 mod3_numbers = [0, 3, 6, 9, 12, 15, 18]
+x = 7
 for _ <- evens, x, n <- mod3_numbers, do: n
 
 IO.inspect list
@@ -42,7 +43,7 @@ File.ls!("./")
 dirs =[
 
   "./",
-  "../03-loops"
+  "./03-loops"
 ]
 for dir <- dirs,
 file <- File.ls!(dir),
@@ -79,8 +80,8 @@ IO.inspect letters
 letters= Enum.reduce(letters, %{}, fn c, acc -> Map.update(acc, c, 64, &(&1 + 1))end)
 
 IO.inspect letters
-text = "AbcaBCabC"
-letters = for<<c <- text>>, c in ?a..?z, reduce: %{} do
-   acc -> Map.update(acc, <<c>>, 64, &(&1 + 1))
+text = "AbcaBCabCc"
+letters = for<<b <- text>>, b in ?a..?z, reduce: %{} do
+   acc -> Map.update(acc, <<b>>, 61, &(&1 + 1))
 end
 IO.inspect letters

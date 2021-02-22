@@ -5,6 +5,7 @@ defmodule Books.Repo.Migrations.CreateAddreferencestoautoresfromterceros do
     create table(:terceros) do
       add :dir, :string
       add :tel, :string
+      add :tercero_id, references(:terceros), null: false
     end
 
     alter table (:autores) do
