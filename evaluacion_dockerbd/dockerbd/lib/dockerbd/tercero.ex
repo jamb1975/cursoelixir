@@ -22,11 +22,12 @@ defmodule Dockerbd.Tercero do
       |> validate_length(:noident, max: 20)
     end
 
-    def insert_tercero(maptercero, mapusuario) do
-        tercero = %Tercero{}
+    def insert(maptercero, mapusuario) do
+        #tercero = %Tercero{}
         #cstercero = changeset(tercero, maptercero )
         tercero = Repo.insert!(maptercero)
         usuarioasoc = Ecto.build_assoc(tercero, :usuario, mapusuario)
-        Usuario.insert_usuariotercero(usuarioasoc);
+        Usuario.insert(usuarioasoc);
     end  
 end    
+

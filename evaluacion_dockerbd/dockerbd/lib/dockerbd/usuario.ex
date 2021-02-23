@@ -1,16 +1,15 @@
 defmodule Dockerbd.Usuario do
   use Ecto.Schema
-  import Ecto.Query
   import Ecto.Changeset
-  alias Dockerbd.{Usuario, Repo}
+  alias Dockerbd.{Tercero, Post, Amigo, Repo}
 
   schema "usuarios" do
     field :name_user# default string
     field :password
     belongs_to :tercero, Tercero
-    belongs_to :usuario, Usuario
-    has_many :usuarios, Usuario
+    has_one :amigo, Amigo
     has_many :posts, Post
+    many_to_many :amigos, Amigo, join_through: "usuarios_amigos"
   end
 
   def changeset(usuario, params \\ %{}) do
@@ -24,18 +23,18 @@ defmodule Dockerbd.Usuario do
     |> validate_length(:password,max: 8)
   end
 
-  def insert_usuariotercero(usuarioasoc) do
+  def insert(usuarioasoc) do
     #csusuario = changeset(usuarioasoc)
-    Repo.insert!(usuarioasoc)
+    usuario = Repo.insert!(usuarioasoc)
+    amigo = %Amigo{}
+    amigoasoc = Ecto.build_assoc(usuario, :amigo, amigo)
+    Repo.insert!(amigoasoc)
   end
 
-  def insert_usuarioamigo(mapusuario, mapusuarioamigo) do
-    mapusuario = Repo.preload(mapusuario, [:usuarios])
+  def insert(mapusuario, mapusuarioamigo) do
+    mapusuario = Repo.preload(mapusuario, [:amigos])
     usuario_changeset = Ecto.Changeset.change(mapusuario)
     usuario_amigos_changeset = usuario_changeset |> Ecto.Changeset.put_assoc(:usuarios, [mapusuarioamigo])
-   # changeset = changeset(mapusuario, %{usuario: mapusuarioamigo})
-    #usuarioamigoasoc = Ecto.build_assoc(mapusuario, :usuario ,mapusuarioamigo)
-    #csusuarioamigo = changeset(%Usuario{}, usuarioamigoasoc )
-   Repo.update!(usuario_amigos_changeset)
+    Repo.update!(usuario_amigos_changeset)
   end
 end
