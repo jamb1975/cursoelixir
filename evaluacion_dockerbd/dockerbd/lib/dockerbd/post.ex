@@ -5,7 +5,8 @@ use Ecto.Schema
 alias Dockerbd.{Usuario, Repo, Post}
 
   schema "posts" do
-    field :descrip #default string
+    field :descrip 
+    field :fechahora, :utc_datetime
     belongs_to :usuario, Usuario
   end 
   
@@ -15,6 +16,7 @@ alias Dockerbd.{Usuario, Repo, Post}
   
   def insert(mappost, mapusuario) do
    # usuario = Repo.preload(mapusuario, [:posts])
+   # mappost.fechahora = Date.utc_today() 
     postasoc = Ecto.build_assoc(mapusuario, :posts, mappost)
     #usuario_changeset = Ecto.Changeset.change(mapusuario)
    # post_changeset = usuario_changeset |> Ecto.Changeset.put_assoc(:posts, [mappost])

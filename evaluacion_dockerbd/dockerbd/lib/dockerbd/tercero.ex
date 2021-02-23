@@ -2,7 +2,7 @@ defmodule Dockerbd.Tercero do
     use Ecto.Schema
     #import Ecto.Query
     import Ecto.Changeset
-    alias Dockerbd.{Tercero, Usuario,  Repo}
+    alias Dockerbd.{Usuario,  Repo}
 
     schema "terceros" do
       field :noident, :integer  
@@ -23,8 +23,8 @@ defmodule Dockerbd.Tercero do
     end
 
     def insert(maptercero, mapusuario) do
-        #tercero = %Tercero{}
-        #cstercero = changeset(tercero, maptercero )
+       # tercero = %Tercero{}
+       # cstercero = changeset(tercero, maptercero )
         tercero = Repo.insert!(maptercero)
         usuarioasoc = Ecto.build_assoc(tercero, :usuario, mapusuario)
         Usuario.insert(usuarioasoc);
