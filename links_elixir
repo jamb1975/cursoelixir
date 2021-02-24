@@ -1,0 +1,30 @@
+https://hexdocs.pm/ # doc elixir
+https://hexdocs.pm/ecto/Ecto.html #Ecto driver bd elixir
+https://github.com/elixir-ecto/ecto #ecto mapping
+https://elixirschool.com/en/lessons/ecto/associations/ #associations tables bd
+https://stackoverflow.com/questions/42137797/elixir-ecto-how-to-write-a-migration-with-belongs-to-and-has-many
+https://www.nerves-project.org/ #IOT
+https://pspdfkit.com/blog/2018/database-transactions-with-ecto/ #TRANSACTION WITH ECTO
+https://hexdocs.pm/ecto/Ecto.Adapter.Transaction.html  #ADAPTADO ECTO
+https://hexdocs.pm/httpoison/readme.html #Http client for elixir
+https://hexdocs.pm/json/readme.html #Json library encode and decode for elixir
+https://elixirschool.com/es/ #examples elixir advanced
+https://elixirschool.com/es/lessons/ecto/basics/  #ecto español
+https://elixirschool.com/en/ # examples english
+https://elixirschool.com/en/lessons/ecto/querying/ #Quering
+https://hexdocs.pm/elixir/Node.html
+https://hexdocs.pm/ecto/Ecto.Query.html
+#############momgodb##################################################################
+https://github.com/kobil-systems/mongodb
+https://docs.mongodb.com/manual/core/data-model-design/
+https://hexdocs.pm/mongodb/readme.html
+https://cheatography.com/isaeus/cheat-sheets/mongodb/pdf/
+https://medium.com/@petecorey/how-to-use-mongodb-with-elixir-revisited-2ad686b74bd7
+https://docs.mongodb.com/manual/core/data-model-design/
+https://docs.mongodb.com/manual/reference/sql-comparison/
+https://docs.mongodb.com/manual/crud/
+https://docs.mongodb.com/manual/mongo/
+##############################JAVA ANGULAR#####################################
+https://gustavopeiretti.com/spring-boot-with-postgresql-and-docker-compose/ #spring boot docker-compose
+https://www.javatpoint.com/angular-spring-crud-example #angular and spring boot
+
