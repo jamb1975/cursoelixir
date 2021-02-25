@@ -1,4 +1,4 @@
-#:binary.bin_to_list  "hola mundo" 
+#:binary.bin_to_list  "hola mundo"
   # :erlang.+(2, 3)
   # 2 |> :erlang.+(3)
   # :io.format("pi es aproximado a: ~10.3f~n", [:math.pi])
@@ -32,10 +32,10 @@
 # h :digraph.add_vertex
 # :digraph.add_edge(digraph, v1, vo)
 #digraph |> :digraph.add_edge(digraph, vo, v2)
-# :digraph.get_short_path(digraph, v2, vo) 
+# :digraph.get_short_path(digraph, v2, vo)
 # :digraph.get_short_path(digraph, v1, v2)
-# :digraph.get_short_path(digraph, v2, v1)  
-# :digraph.get_short_path(digraph, vo, v2) 
+# :digraph.get_short_path(digraph, v2, v1)
+# :digraph.get_short_path(digraph, vo, v2)
 
 
 #########################################################################
@@ -51,15 +51,17 @@
 #                       receive do
 #                         {:hi, client}  -> send(client, :bye)
 #                       end
-#                     end) 
+#                     end)
 
-#                     iex(chao@PSLT3913)1> send(pid, {:hi, self()}) 
+#                     iex(chao@PSLT3913)1> send(pid, {:hi, self()})
 #                     iex(chao@PSLT3913)1>   flush()
- 
+
 #                  iex(bye@PSLT3913)1> pid = Node.spawn_link(:"hola@PSLT3913", fn ->
 #                                                                              receive do
 #                                                                                {:hi, client}  -> send(client, :bye)
 #                                                                               end
-#  iex --sname hello -S mix                                                                           end) 
+#  iex --sname hello -S mix                                                                           end)
 #  iex --sname bye -S mix
 
+###################
+{:ok, sup} = GENServer.Supervisor.start_link([])
