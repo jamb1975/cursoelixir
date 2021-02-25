@@ -78,3 +78,4 @@ IO.puts(FObs.await())
 FObs.detach(subject)
 FObs.increment(subject)
 IO.puts(FObs.await())
+###################################

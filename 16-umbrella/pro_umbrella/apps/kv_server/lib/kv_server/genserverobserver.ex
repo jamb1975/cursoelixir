@@ -8,13 +8,21 @@ defmodule GenServerObserver do
         true -> GenServer.start_link(__MODULE__, {initial_state, []})
        end
       end
-      def start_link(opts), do: GenServer.start_link(__MODULE__, 0, opts)
+
+      def start_link(opts), do: GenServer.start_link(__MODULE__, {0, []}, opts)
+
       def init(state), do: {:ok, state}
-      def read(subject), do:  send(subject, {:read, subject})#GenServer.call(subject, :read)
-      def increment(subject), do: GenServer.cast(subject, :increment)
-      def decrement(subject), do: GenServer.cast(subject, :decrement)
+
+      def read(gso), do:  GenServer.call(gso, :read)#GenServerObserver.call(gso, :read)
+
       def attach(subject), do: GenServer.call(subject, {:attach, self()}) # función agregar observer
+
       def detach(subject), do: GenServer.call(subject, :detach) # función remover bserver
+
+      def increment(subject), do: GenServer.cast(subject, :increment)
+
+      def decrement(subject), do: GenServer.cast(subject, :decrement)
+
       def notify(observers, state)  do
        # IO.inspect observers
         observers |> Enum.each(&send(&1, state))
@@ -22,15 +30,21 @@ defmodule GenServerObserver do
       end
 
 
-       def handle_call(:read, from_id, {state, observers}), do: {:reply, state, {state, observers}}
+       def handle_call(:read, _from_id, {state, observers}), do: {:reply, state, {state, observers}}
 
        def handle_call(:detach, _from_id, {state, _}), do: {:reply, state, {state, []}} # handle call remover observer
+
+       def handle_call({:attach, observer_id}, _from_id, {state, observers}) do
+        # notify(observers,state)
+        observers = observers ++ [observer_id]
+        {:reply, state, {state,observers}}
+      end
 
        def handle_cast(:increment, {state, observers}) do
         state = state + 1
         notify(observers, state)
         {:noreply, {state, observers}}
-        raise "Error Sum"
+         #raise "Error Sum"
        end
 
        def handle_cast(:decrement,  {state, observers}) do
@@ -39,11 +53,7 @@ defmodule GenServerObserver do
         {:noreply,  {state, observers}}
        end
 
-      def handle_call({:attach, observer_id}, _from_id, {state, observers}) do
-     # notify(observers,state)
-        observers = observers ++ [observer_id]
-        {:reply, state, {state,observers}}
-      end
+
 
       def await(millis \\ 1000) do
         receive do
@@ -54,15 +64,17 @@ defmodule GenServerObserver do
       end
     end
 
-  # {:ok, subject}  = GenServer.create()
+  # {:ok, subject}  =  KVServer.GenServerObserverr.create()
   # subject |> IO.inspect()
-  # GenServer.await |> IO.inspect()
-  # GenServer.attach(subject) |> IO.inspect()
-  # GenServer.detach(subject)
-  # GenServer.increment(subject)
-  # GenServer.await |> IO.inspect()
-  # GenServer.attach(subject) |> IO.inspect()
-  # GenServer.increment(subject)
-  # GenServer.await |> IO.inspect()
-  # GenServer.decrement(subject)
-  # GenServer.await |> IO.inspect()
+  # GenServerObserver.await |> IO.inspect()
+  # GenServerObserver.attach(subject) |> IO.inspect()
+  # GenServerObserver.detach(subject)
+  # GenServerObserver.increment(subject)
+  # GenServerObserver.await |> IO.inspect()
+  # GenServerObserver.attach(subject) |> IO.inspect()
+  # GenServerObserver.increment(subject)
+  # GenServerObserver.await |> IO.inspect()
+  # GenServerObserver.decrement(subject)
+  # GenServerObserver.await |> IO.inspect()
+  # {:ok, suppid} = GenServerObserver.Supervisor.start_link([])
+  # [{_, subject, _, _}] = Supervisor.which_children(suppid)

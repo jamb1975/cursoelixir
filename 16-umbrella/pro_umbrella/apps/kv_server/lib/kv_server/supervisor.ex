@@ -1,13 +1,14 @@
-defmodule GENServer.Supervisor do
+defmodule GenServerObserver.Supervisor do
   use Supervisor
-  def start_link(opts)
-   Supervisor.(__MODULE__, :ok, :opts)
+  def start_link(opts) do
+   Supervisor.start_link(__MODULE__, :ok, opts)
  end
 
- def ini(:ok) do
+ def init(:ok) do
     children = [
       #GenServerObserver
       {GenServerObserver, name: GenServerObserver}
     ]
     Supervisor.init(children, strategy: :one_for_one)
+  end
 end

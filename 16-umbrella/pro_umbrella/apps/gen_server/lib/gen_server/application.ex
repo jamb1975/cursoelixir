@@ -9,7 +9,7 @@ defmodule GENServer.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: GENServer.Worker.start_link(arg)
-      # {GENServer.Worker, arg}
+      {GENServer.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

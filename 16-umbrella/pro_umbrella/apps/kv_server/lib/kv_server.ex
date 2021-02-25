@@ -1,53 +1,64 @@
 defmodule KVServer do
-  defmodule KV do
-    @moduledoc """
-    Provides a key-vale (KV) process to access a shared state map based on agent
-    ## Examples
-    iex> {:ok, kv} = KV.start_link()
-    {ok:, #PID<0.101.0>}
-    iex> KV.read(kv, :hello)
-    nil
-    iex> KV.update(kv, :hello, "World)
-    :ok
-    iex> KV.read(kv, :hello)
-    "World"
-    """
-  @vsn 2
-  @initial_state %{hello: "Mundo"}
-    @doc """
-       Create a pid to read and create/update key-value pair
-  
-       ##Example
-        iex> {:ok, kv} = KV.start_link()
-        {ok:, #PID<0.101.0>}
-    """
-    def start_link do
-      Agent.start_link(fn -> @initial_state end)
+  require Logger
+
+  def accept(port) do
+    {:ok, socket} = :gen_tcp.listen(port, [:binary, packet: :line, active: false, reuseaddr: true])
+    Logger.info("Aceptando conexiones en el puerto, #{port}")
+    loop_acceptor(socket)
+  end
+
+  defp loop_acceptor(socket) do
+    {:ok, client} = :gen_tcp.accept(socket)
+    Task.start_link(fn -> serve(client) end)
+    loop_acceptor(socket)
+  end
+
+  defp serve(socket) do
+    msg = case read_line(socket) do
+      {:ok, data} -> case KVServer.Command.parse(data) do
+      {:ok, command} -> KVServer.Command.run(command)
+      {:error, _} = err -> err
+      end
+      {:error, _} = err -> err
     end
-  
-  
-     @doc """
-       read a value for a key, if the key if does not exists return null
-  
-       ##Example
-        iex> KV.read(kv, :hello)
-        nil
-    """
-    def read(kv_pid, key) do
-       Agent.get(kv_pid, fn map -> Map.get(map, key) end)
-    end
-  
-    @doc """
-       updates or creates (if necessary) a value a key
-       ##Example
-        iex> KV.update(kv, :hello, "World)
-        :ok
-    """
-    def update(kv_pid, key, value) do
-      Agent.update(kv_pid, fn map -> Map.put(map, key, value) end)
-    end
- 
-    def hello do
-     :world
-   end
+     write_line(msg, socket)
+     serve(socket)
+  end
+
+  defp read_line(socket) do
+    :gen_tcp.recv(socket, 0)
+    #{:ok, data} = :gen_tcp.recv(socket, 0)
+    #Logger.info("Se recibio: #{data}")
+  end
+
+  defp write_line({:ok, line}, socket) do
+    :gen_tcp.send(socket, "Respuesta: #{line}")
+  end
+
+  defp write_line({:error, :close}, _socket) do
+    exit(:shutdown)
+  end
+
+  defp write_line({:error, :unknow_command}, socket) do
+    :gen_tcp.send(socket, "UNKNOW COMMAND\r\n")
+  end
+
+  defp write_line({:error, err}, socket) do
+    :gen_tcp.send(socket, "ERROR\r\n")
+    exit(err)
+  end
+  def inicio() do
+  {:ok, subject}  =  GenServerObserver.create()
+  subject |> IO.inspect()
+  GenServerObserver.await |> IO.inspect()
+  GenServerObserver.attach(subject) |> IO.inspect()
+  GenServerObserver.detach(subject)
+  GenServerObserver.increment(subject)
+  GenServerObserver.await |> IO.inspect()
+  GenServerObserver.attach(subject) |> IO.inspect()
+  GenServerObserver.increment(subject)
+  GenServerObserver.await |> IO.inspect()
+  GenServerObserver.decrement(subject)
+  GenServerObserver.await |> IO.inspect()
+  end
 end
