@@ -53,12 +53,12 @@ defmodule KVServer do
   GenServerObserver.await |> IO.inspect()
   GenServerObserver.attach(subject) |> IO.inspect()
   GenServerObserver.detach(subject)
-  GenServerObserver.increment(subject)
+  GenServerObserver.increment({subject, 7})
   GenServerObserver.await |> IO.inspect()
   GenServerObserver.attach(subject) |> IO.inspect()
-  GenServerObserver.increment(subject)
+  GenServerObserver.increment({subject, 7})
   GenServerObserver.await |> IO.inspect()
-  GenServerObserver.decrement(subject)
+  GenServerObserver.decrement({subject, 7})
   GenServerObserver.await |> IO.inspect()
   end
 end

@@ -19,9 +19,9 @@ defmodule GenServerObserver do
 
       def detach(subject), do: GenServer.call(subject, :detach) # función remover bserver
 
-      def increment(subject), do: GenServer.cast(subject, :increment)
+      def increment({subject, vincre}), do: GenServer.cast(subject, {:increment, vincre})
 
-      def decrement(subject), do: GenServer.cast(subject, :decrement)
+      def decrement({subject, vdecre}), do: GenServer.cast(subject, {:decrement, vdecre})
 
       def notify(observers, state)  do
        # IO.inspect observers
@@ -38,22 +38,20 @@ defmodule GenServerObserver do
         # notify(observers,state)
         observers = observers ++ [observer_id]
         {:reply, state, {state,observers}}
-      end
+       end
 
-       def handle_cast(:increment, {state, observers}) do
-        state = state + 1
+      def handle_cast({:increment, vincre}, {state, observers}) do
+        state = state + vincre
         notify(observers, state)
         {:noreply, {state, observers}}
          #raise "Error Sum"
-       end
+      end
 
-       def handle_cast(:decrement,  {state, observers}) do
-        state = state - 1
+       def handle_cast({:decrement, vdecre},  {state, observers}) do
+        state = state - vdecre
         notify(observers, state)
         {:noreply,  {state, observers}}
        end
-
-
 
       def await(millis \\ 1000) do
         receive do
