@@ -22,6 +22,7 @@ defmodule CommandTest do
     #KVServer.Supervisor.start_link(__MODULE__, :ok, opts)
     {:ok, supid} = KVServer.Command.run(:create)
     assert  {:ok, "UNKNOWN COMMAND\r\n"} ==  KVServer.Command.run({:invalid, 70})
+    assert  {:ok, "UNKNOWN COMMAND\r\n"} ==  KVServer.Command.run({:invalid, ""})
   end
 
   test "running COMMAND parse" do
