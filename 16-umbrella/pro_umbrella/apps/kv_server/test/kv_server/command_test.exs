@@ -2,9 +2,16 @@ defmodule CommandTest do
   use ExUnit.Case
   doctest KVServer.Command
 
+  test "running unknown command" do
+    #KVServer.Supervisor.start_link(__MODULE__, :ok, opts)
+    {:ok, _} = KVServer.Command.run(:create)
+    assert  {:ok, "UNKNOWN COMMAND\r\n"} ==  KVServer.Command.run({:invalid, 70})
+    assert  {:ok, "UNKNOWN COMMAND\r\n"} ==  KVServer.Command.run({:invalid, ""})
+  end
+
   test "running command" do
     #KVServer.Supervisor.start_link(__MODULE__, :ok, opts)
-    {:ok, supid} = KVServer.Command.run(:create)
+    {:ok, _} = KVServer.Command.run(:create)
 
     assert {:ok, "0\r\n"} == KVServer.Command.run(:read)
 
@@ -18,18 +25,12 @@ defmodule CommandTest do
     assert {:ok,  "0\r\n"} == KVServer.Command.run(:read)
   end
 
-  test "running unknown command" do
-    #KVServer.Supervisor.start_link(__MODULE__, :ok, opts)
-    {:ok, supid} = KVServer.Command.run(:create)
-    assert  {:ok, "UNKNOWN COMMAND\r\n"} ==  KVServer.Command.run({:invalid, 70})
-    assert  {:ok, "UNKNOWN COMMAND\r\n"} ==  KVServer.Command.run({:invalid, ""})
-  end
-
   test "Test error parse" do
     assert {:error, :invalid} ==  KVServer.Command.parse("_")
     assert {:error, :invalid} ==  KVServer.Command.parse("_ssss")
+
     assert {:error, :invalid} ==  KVServer.Command.parse("")
-    assert {:error, :invalid} ==  KVServer.Command.parse("I 7 8")
+    assert {:error, :invalid} ==  KVServer.Command.parse("I 78")
     assert {:error, :invalid} ==  KVServer.Command.parse("D 7 8")
     assert {:error, :invalid} ==  KVServer.Command.parse("////")
     assert {:error, :unknown_command} ==  KVServer.Command.parse("ERR")

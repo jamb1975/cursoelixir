@@ -7,10 +7,15 @@ defmodule KVServer.Application do
 
   @impl true
   def start(_type, _args) do
-   # port = String.to_integer(System.get_env("PORT")) || 8000
-    children = [
-    #  {Task.Supervisor, name: KVServer.TaskSupervisor},
-    #  {Task, fn -> KVServer.accept(port) end}
+    port = 7000#[port: {:system, "PORT"}]
+    # try do
+    #   port = String.to_integer(System.get_env("PORT")) || 8000
+    # rescue
+    #   RuntimeError -> port = 7000
+    # end
+      children = [
+      {Task.Supervisor, name: KVServer.TaskSupervisor},
+      {Task, fn -> KVServer.accept(port) end}
       # Starts a worker by calling: KVServer.Worker.start_link(arg)
       # {KVServer.Worker, arg}
     ]

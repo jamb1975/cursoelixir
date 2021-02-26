@@ -32,7 +32,7 @@ defmodule KVServer.Command do
       ["I", vincre] -> {:ok, {:increment, String.to_integer(vincre)}}
       ["D", vdecre] -> {:ok, {:decrement, String.to_integer(vdecre)}}
       ["ERR"] -> {:error, :unknown_command}
-       _ -> {:ok, nil}
+       _ -> {:error, :invalid}
     end
   end
 end
