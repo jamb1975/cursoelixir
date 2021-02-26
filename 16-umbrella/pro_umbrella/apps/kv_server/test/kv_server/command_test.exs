@@ -25,6 +25,16 @@ defmodule CommandTest do
     assert  {:ok, "UNKNOWN COMMAND\r\n"} ==  KVServer.Command.run({:invalid, ""})
   end
 
+  test "Test error parse" do
+    assert {:error, :invalid} ==  KVServer.Command.parse("_")
+    assert {:error, :invalid} ==  KVServer.Command.parse("_ssss")
+    assert {:error, :invalid} ==  KVServer.Command.parse("")
+    assert {:error, :invalid} ==  KVServer.Command.parse("I 7 8")
+    assert {:error, :invalid} ==  KVServer.Command.parse("D 7 8")
+    assert {:error, :invalid} ==  KVServer.Command.parse("////")
+    assert {:error, :unknown_command} ==  KVServer.Command.parse("ERR")
+  end
+
   test "running COMMAND parse" do
     {:ok, _} = KVServer.Command.run(:create)
     assert {:ok, :create} == KVServer.Command.parse("C")
@@ -32,13 +42,5 @@ defmodule CommandTest do
 
     assert {:ok, {:increment, 7}} ==  KVServer.Command.parse("I 7")
     assert {:ok, {:decrement, 10}} ==  KVServer.Command.parse("D 10")
-
-    assert {:error, :unknown_command} ==  KVServer.Command.parse("ERR")
-    assert {:ok, nil} ==  KVServer.Command.parse("_")
-    assert {:ok, nil} ==  KVServer.Command.parse("_ssss")
-    assert {:ok, nil} ==  KVServer.Command.parse("")
-    assert {:ok, nil} ==  KVServer.Command.parse("I 7 8")
-    assert {:ok, nil} ==  KVServer.Command.parse("D 7 8")
-    assert {:ok, nil} ==  KVServer.Command.parse("////")
   end
 end
