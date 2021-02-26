@@ -47,18 +47,19 @@ defmodule KVServer do
     :gen_tcp.send(socket, "ERROR\r\n")
     exit(err)
   end
-  def inicio() do
-  {:ok, subject}  =  GenServerObserver.create()
-  subject |> IO.inspect()
-  GenServerObserver.await |> IO.inspect()
-  GenServerObserver.attach(subject) |> IO.inspect()
-  GenServerObserver.detach(subject)
-  GenServerObserver.increment({subject, 7})
-  GenServerObserver.await |> IO.inspect()
-  GenServerObserver.attach(subject) |> IO.inspect()
-  GenServerObserver.increment({subject, 7})
-  GenServerObserver.await |> IO.inspect()
-  GenServerObserver.decrement({subject, 7})
-  GenServerObserver.await |> IO.inspect()
-  end
+
+  # def inicio() do
+  #   {:ok, subject}  =  GenServerObserver.create()
+  #   subject |> IO.inspect()
+  #   GenServerObserver.await |> IO.inspect()
+  #   GenServerObserver.attach(subject) |> IO.inspect()
+  #   GenServerObserver.detach(subject)
+  #   GenServerObserver.increment(subject, 7)
+  #   GenServerObserver.await |> IO.inspect()
+  #   GenServerObserver.attach(subject) |> IO.inspect()
+  #   GenServerObserver.increment(subject, 7)
+  #   GenServerObserver.await |> IO.inspect()
+  #   GenServerObserver.decrement(subject, 7)
+  #   GenServerObserver.await |> IO.inspect()
+  # end
 end

@@ -19,9 +19,9 @@ defmodule GenServerObserver do
 
       def detach(subject), do: GenServer.call(subject, :detach) # función remover bserver
 
-      def increment({subject, vincre}), do: GenServer.cast(subject, {:increment, vincre})
+      def increment(subject, vincre), do: GenServer.cast(subject, {:increment, vincre})
 
-      def decrement({subject, vdecre}), do: GenServer.cast(subject, {:decrement, vdecre})
+      def decrement(subject, vdecre), do: GenServer.cast(subject, {:decrement, vdecre})
 
       def notify(observers, state)  do
        # IO.inspect observers
