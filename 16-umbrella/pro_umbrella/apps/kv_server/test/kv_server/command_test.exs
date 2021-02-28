@@ -26,6 +26,7 @@ defmodule CommandTest do
   end
 
   test "Test error parse" do
+    GenServerObserver.reset(GenServerObserver)
     assert {:error, :invalid} ==  KVServer.Command.parse("_")
     assert {:error, :invalid} ==  KVServer.Command.parse("_ssss")
 
