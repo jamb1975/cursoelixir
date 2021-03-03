@@ -1,4 +1,4 @@
-defmodule Dockerbd.Repo.Migrations.CreateBdusuariospost do
+defmodule Redfree.Repo.Migrations.CreateBdRedFree do
   use Ecto.Migration
 
   def change do
