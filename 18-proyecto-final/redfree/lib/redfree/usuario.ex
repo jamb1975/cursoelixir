@@ -1,7 +1,9 @@
 defmodule Redfree.Usuario do
   use Ecto.Schema
+
+  import Ecto.Query
   import Ecto.Changeset
-  alias Redfree.{Tercero, Post, Amigo, Repo}
+  alias Redfree.{Usuario, Tercero, Post, Amigo, Repo}
 
   schema "usuarios" do
     field :name_user# default string
@@ -13,14 +15,14 @@ defmodule Redfree.Usuario do
   end
 
   def changeset(usuario, params \\ %{}) do
-    usuario
-    |> cast(params, [:name_user, :password])
-    |> validate_required([:name_user, :password])
-    |> validate_length(:name_user, min: 4)
-    |> validate_length(:name_user, max: 8)
-    |> validate_length(:name_user, min: 10)
-    |> validate_length(:password,min: 8)
-    |> validate_length(:password,max: 8)
+    usuario = %Usuario{}
+    |> cast(usuario, params, [:name_user, :password])
+    # |> validate_required([:name_user, :password])
+    # |> validate_length(:name_user, min: 4)
+    # |> validate_length(:name_user, max: 8)
+    # |> validate_length(:name_user, min: 10)
+    # |> validate_length(:password,min: 8)
+    # |> validate_length(:password,max: 8)
   end
 
   def insert(usuario, tercero) do
@@ -28,7 +30,11 @@ defmodule Redfree.Usuario do
     usuarioasoc = Ecto.build_assoc(tercero, :usuario, usuario)
     usuario = Repo.insert!(usuarioasoc)
   end
-
+  
+  def keyword_query do
+    query = from u in Usuario, select: u
+    Repo.all(query)
+  end
   # def insert(mapusuario, mapusuarioamigo) do
   #   mapusuario = Repo.preload(mapusuario, [:amigos])
   #   usuario_changeset = Ecto.Changeset.change(mapusuario)

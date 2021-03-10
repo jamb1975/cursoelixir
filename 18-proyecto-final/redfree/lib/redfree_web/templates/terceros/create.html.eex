@@ -1,0 +1,27 @@
+<%= form_for @changeset, Routes.tercero_path(@conn, :create), fn f -> %>
+  <label>
+    N° ident: <%= text_input f, :noident%>
+  </label>
+  
+  <label>
+    First name: <%= text_input f, :first_name %>
+  </label>
+
+  <label>
+    Last name: <%= text_input f, :last_name%>
+  </label>
+
+  <label>
+    Email: <%= text_input f, :email%>
+  </label>
+
+  <label>
+    Dir: <%= text_input f, :dir%>
+  </label>
+
+  <label>
+    Tel: <%= text_input f, :tel%>
+  </label>
+
+  <%= submit "Submit" %>
+<% end %>

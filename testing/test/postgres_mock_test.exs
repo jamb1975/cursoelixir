@@ -15,7 +15,7 @@ defmodule PostgresMockTest do
   test "Create a user" do
     db_handler =PostgresMock.create()
     expected = %User{id: 1, name: "Karol"}
-    new_user = DbHandler.create_user(db_handler, %{name: "Karol"})
+    new_user = DbHandler.create_tercero(db_handler, %{noident: "35285711", first_name: "Carolina", last_name: "Torres", email: "c@gmail.com", dir: "cll 3", tel: "4444", name_user: "ctorres", password: "123" })
     assert expected == new_user
   end
 

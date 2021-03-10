@@ -18,8 +18,9 @@ defmodule  PostgresMock do
     tercero = Tercero.insert(tercero)
     usuario = Usuario.insert(usuario, tercero);
     amigo = Amigo.insert(usuario)
-    tercero_usuario = %{id: tercero.id, noident: tercero.noident, first_name: tercero.first_name, last_name: tercero.last_name, email: tercero.email, dir: tercero.dir, tel: tercero.tel, id_user: usuario.id, name_user: tercero.name_user, password: usuario.password, id_amigo: amigo.id}
-    {:reply, tercero_usuario, tercero_usuario}
+    tercero_usuario = %{id: tercero.id, noident: tercero.noident, first_name: tercero.first_name, last_name: tercero.last_name, email: tercero.email, dir: tercero.dir, tel: tercero.tel, id_user: usuario.id, name_user: usuario.name_user, password: usuario.password, id_amigo: amigo.id}
+    result= {:ok, tercero}
+    {:reply, result, tercero_usuario}
   end
   
   @impl true

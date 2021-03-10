@@ -1,6 +1,18 @@
 version: '3.1'
 services:
-  
+  app:
+    container_name: phoenix_dev
+    image: phoenix_dev
+    build: ./
+    ports:
+      - "4000:4000"
+    environment:
+        POSTGRES_PASSWORD: redf
+        POSTGRES_USER: postgres
+        POSTGRES_DB: redfree_dev
+        POSTGRES_HOSTNAME: dbpostgresql
+    depends_on:
+      - dbpostgresql
   dbpostgresql:
     image: postgres
     volumes:
@@ -8,7 +20,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_PASSWORD=redf
-      - POSTGRES_USER=postgres
+        POSTGRES_PASSWORD: redf
+        POSTGRES_USER: postgres
+        POSTGRES_DB: redfree_dev
+        HOSTNAME: dbpostgresql
 volumes: 
   posgresdocker-data:

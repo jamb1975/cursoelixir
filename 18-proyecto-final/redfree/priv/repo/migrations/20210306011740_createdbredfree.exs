@@ -36,3 +36,4 @@ defmodule Redfree.Repo.Migrations.CreateBdRedFree do
     create unique_index(:usuarios_amigos, [:usuario_id, :amigo_id])
   end
 end  
+

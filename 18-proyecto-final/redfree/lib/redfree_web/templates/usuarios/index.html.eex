@@ -1,0 +1,15 @@
+ <section class="column-9">
+  <table>
+    <tr>
+      <th>Name user</th>
+      <th>Password</th>
+    </tr>
+
+    <%= for u <- @usuarios do %>
+      <tr>
+        <td><%= u.name_user %></td>
+        <td><%= u.password%></td>
+    </tr>
+    <% end %>
+  </table>
+</section>

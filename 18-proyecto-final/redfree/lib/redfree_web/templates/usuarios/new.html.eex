@@ -1,0 +1,12 @@
+<%= form_for @changeset, Routes.usuarios_path(@conn, :create), fn f -> %>
+  <label>
+    Name User: <%= text_input f, :name_user %>
+  </label>
+
+  <label>
+    Password: <%= hidden_input f, :password%>
+  </label>
+
+  
+  <%= submit "Submit" %>
+<% end %>

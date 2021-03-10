@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :redfree, Redfree.Repo,
-  username: "postgres",
-  password: "redf",
-  database: "redfree_dev",
-  hostname: "localhost",
+  username: System.get_env("POSTGRES_USER") || "postgres" ,
+  password: System.get_env("POSTGRES_PASSWORD") || "redf",
+  database: System.get_env("POSTGRES_DB") || "redfree_dev",
+  hostname: System.get_env("POSTGRES_HOSTNAME") || "dbpostgresql",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

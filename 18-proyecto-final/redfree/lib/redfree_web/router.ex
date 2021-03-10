@@ -7,7 +7,6 @@ defmodule RedfreeWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug RedfreeWeb.Plugs.Locale, "es"
   end
 
   pipeline :api do
@@ -20,7 +19,12 @@ defmodule RedfreeWeb.Router do
     get "/", PageController, :index
     get "/redfree", RedFreeController, :index
     get "/redfree/:messenger", RedFreeController, :show
-    #resources "/users", UserController
+  end
+
+  scope "/", RedfreeWeb do
+    pipe_through :browser # Use the default browser stack
+    resources "/terceros", TercerosController,  only: [:index, :new, :create]
+    resources "/usuarios", UsuariosController,  only: [:index, :new, :create]
   end
 
   # Other scopes may use custom stacks.
